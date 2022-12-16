@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body, input, texarea, button {
+  @apply font-sans text-base font-normal
+}
+
+:focus {
+  @apply outline-none outline-indigo-400
+}
