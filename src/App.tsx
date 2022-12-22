@@ -1,23 +1,49 @@
+import React, { useState } from "react";
+
 import todoLogo from "assets/svg/todo-logo.svg";
 
 import { Form } from "components/Form";
 import { Task } from "components/Task";
 
+interface TasksProps {
+  id: number;
+  description: string;
+  status: "done" | "inProgress";
+}
+
 export function App() {
+  const [tasks, setTasks] = useState<TasksProps[]>([]);
+
+  function handleCreateTask(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const taskField = event.currentTarget.elements.namedItem(
+      "task",
+    ) as HTMLInputElement;
+
+    const newTask: TasksProps = {
+      id: Math.round(Math.random() * 100000),
+      description: taskField.value,
+      status: "inProgress",
+    };
+
+    setTasks(prevState => [...prevState, newTask]);
+  }
+
   return (
-    <div className="w-full h-screen flex flex-col bg-gray-600">
+    <div className="w-full h-screen flex flex-col bg-gray-600 overflow-y-auto">
       <header className="w-full py-20 flex items-center justify-center bg-gray-700">
-        <img src={todoLogo} className="text-sky-500" alt="" />
+        <img className="text-sky-500" src={todoLogo} alt="" />
       </header>
       <section className="w-full flex-1 flex justify-center">
-        <main className="w-full h-full flex flex-col max-w-[736px]">
-          <Form />
+        <main className="w-full max-w-[736px] h-full flex flex-col">
+          <Form onSubmit={handleCreateTask} />
           <section className="w-full flex flex-col flex-1">
             <header className="w-full py-6 flex justify-between border-b border-b-gray-400">
               <div className="space-x-2">
                 <span className="font-bold text-sky-500">Tarefas criadas</span>
                 <span className="px-2 py-[0.175rem] text-xs bg-gray-400 text-gray-200 rounded-full">
-                  0
+                  {tasks.length}
                 </span>
               </div>
               <div className="space-x-2">
@@ -28,14 +54,9 @@ export function App() {
               </div>
             </header>
             <section className="w-full py-4 flex-1 space-y-3">
-              <Task>
-                Integer urna interdum massa libero auctor neque turpis turpis
-                semper. Duis vel sed fames integer.
-              </Task>
-              <Task>
-                Integer urna interdum massa libero auctor neque turpis turpis
-                semper. Duis vel sed fames integer.
-              </Task>
+              {tasks.map(task => (
+                <Task key={task.id}>{task.description}</Task>
+              ))}
             </section>
           </section>
         </main>

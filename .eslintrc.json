@@ -23,10 +23,12 @@
 	],
 	"rules": {
 		"prettier/prettier": "error",
+		"consistent-return": "off",
 		"import/extensions": "off",
 		"import/no-unresolved": "off",
 		"import/prefer-default-export": "off",
 		"react/jsx-filename-extension": [1, { "extensions": [".jsx",".tsx"] }],
+		"react/jsx-no-bind": "off",
 		"react/jsx-props-no-spreading": "off",
 		"react/react-in-jsx-scope": "off"
 	}
