@@ -14,6 +14,17 @@ interface TasksProps {
 export function App() {
   const [tasks, setTasks] = useState<TasksProps[]>([]);
 
+  const completedTasks = tasks.filter(task => task.status === "done");
+
+  function handleToggleTask(idTask: number, isChecked: boolean) {
+    const taskIndex = tasks.findIndex(task => task.id === idTask);
+
+    const newTasks = [...tasks];
+    newTasks[taskIndex].status = isChecked ? "done" : "inProgress";
+
+    setTasks(newTasks);
+  }
+
   function handleCreateTask(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -49,13 +60,15 @@ export function App() {
               <div className="space-x-2">
                 <span className="font-bold text-indigo-400">Concluídas</span>
                 <span className="px-2 py-[0.175rem] text-xs bg-gray-400 text-gray-200 rounded-full">
-                  0
+                  {completedTasks.length} de {tasks.length}
                 </span>
               </div>
             </header>
             <section className="w-full py-4 flex-1 space-y-3">
               {tasks.map(task => (
-                <Task key={task.id}>{task.description}</Task>
+                <Task key={task.id} idTask={task.id} onDone={handleToggleTask}>
+                  {task.description}
+                </Task>
               ))}
             </section>
           </section>
