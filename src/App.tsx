@@ -41,6 +41,12 @@ export function App() {
     setTasks(prevState => [...prevState, newTask]);
   }
 
+  function handleDeleteTask(idTask: number) {
+    const tasksWithoutTaskDeleted = tasks.filter(task => task.id !== idTask);
+
+    setTasks(tasksWithoutTaskDeleted);
+  }
+
   return (
     <div className="w-full h-screen flex flex-col bg-gray-600 overflow-y-auto">
       <header className="w-full py-20 flex items-center justify-center bg-gray-700">
@@ -66,7 +72,12 @@ export function App() {
             </header>
             <section className="w-full py-4 flex-1 space-y-3">
               {tasks.map(task => (
-                <Task key={task.id} idTask={task.id} onDone={handleToggleTask}>
+                <Task
+                  key={task.id}
+                  idTask={task.id}
+                  onDone={handleToggleTask}
+                  onDelete={handleDeleteTask}
+                >
                   {task.description}
                 </Task>
               ))}
