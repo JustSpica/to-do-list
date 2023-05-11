@@ -1,6 +1,6 @@
 ![To do list](https://github.com/JustSpica/to-do-list/assets/75824415/b75ab696-96d5-421a-8e79-5c679b6568ec)
 
-# Coffee Delivery
+# To do List
 [![Author](https://img.shields.io/badge/author-JustSpica-4EA8DE?style=flat-square)](https://github.com/JustSpica)
 [![Languages](https://img.shields.io/github/languages/count/JustSpica/to-do-list?color=4EA8DE&style=flat-square)](#)
 [![Stars](https://img.shields.io/github/stars/JustSpica/to-do-list?color=4EA8DE&style=flat-square)](https://github.com/JustSpica/to-do-list/stargazers)
